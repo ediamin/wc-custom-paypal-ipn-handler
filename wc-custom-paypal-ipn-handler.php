@@ -46,7 +46,7 @@ add_action( 'valid-paypal-standard-ipn-request', function () {
     $gatways        = wc()->payment_gateways()->payment_gateways();
     $paypal         = $gatways['paypal'];
     $testmode       = 'yes' === $paypal->get_option( 'testmode', 'no' );
-    $identity_token = $paypal->get_option( 'identity_token' );
+    $receiver_email = $paypal->get_option( 'receiver_email', $paypal->email );
 
-    new WC_Gateway_Paypal_IPN_Handler_Override( $testmode, $identity_token );
+    new WC_Gateway_Paypal_IPN_Handler_Override( $testmode, $receiver_email );
 }, 9 );
